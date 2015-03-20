@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+
+
+<div class="col-md-3">
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Авторы
+    <span class="badge"><%= @authors.count%></span>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <ul class="nav">
+        <% @authors.each do |author|%>
+        <div class="form-group">
+            <li><%= author.id%>.
+                <a href="authors/<%= author.id%>/show">
+                    <%= author.name%>
+                </a>
+            </li>
+            <li><h6>Колличество статей:
+                    <span class="badge"><%= author.posts.count%></span>
+                </h6>
+            </li>
+        </div>
+        <%end%>
+    </ul>
+  </div>
+    <div class="text-center"><%= will_paginate @authors %></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+
+<div class="col-md-10">
+<div class="panel panel-info">
+  <div class="panel-heading">
+        <h3 class="panel-title">Статья: <%= @post.title%></h3>
+  </div>
+  <div class="panel-body">
+   <div class="form-group">
+        <%= @post.text%>
+        <br><br>
+        <label>Теги: </label>
+        <% @post.tags.each do |tag|%>
+            <a href="/tags/<%= tag.id%>/search"><span class="label label-default"><%= tag.name %></span></a>
+        <%end%>
+        <div class="form-group">
+            <label>Автор: </label><a href="/authors/<%= @author.id%>/show"><mark><%= @author.name%></mark></a>
+        </div>
+    </div>
+
+    </div>
+    </div>
+
+    <h3>Комментарии к статье:</h3>
+    <h5>Число комментарий:<span class="badge"> <%= @comments.count%></span></h5>
+    <% @comments.each do |comment|%>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <%= comment.user%>
+            </div>
+            <div class="panel-body">
+            <%= comment.text%>
+            </div>
+        </div>
+    <%end%>
+    </div>
+</div>
+
+
+
+

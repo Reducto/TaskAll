@@ -1,0 +1,56 @@
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<div class="col-md-3">
+<div class="panel panel-primary">
+  <div class="panel-heading">
+        <h3 class="panel-title">Информация об авторе
+        <span class="badge"><%= @author.id%></span>
+        </h3>
+  </div>
+  <div class="panel-body">
+   <div class="form-group">
+            <label>Имя:</label> <%= @author.name%>
+        </div>
+        <div class="form-group">
+            <label>Email:</label> <%= @author.email%>
+        </div>
+        <div class="form-group">
+            <label>Город:</label> <%= @author.city%>
+        </div>
+        <div class="form-group">
+            <label>Адрес:</label> <%= @author.address%>
+        </div>
+        <div class="form-group">
+            <label>Дата рождения:</label> <%= l @author.date, format: :long %>
+        </div>
+        </div>
+  </div>
+</div>
+
+
+<div class="col-md-7">
+<div class="panel panel-primary">
+  <div class="panel-heading">
+        <h3 class="panel-title">Список статей
+        <span class="badge"><%= @posts.count%></span>
+        </h3>
+  </div>
+  <div class="panel-body">
+    <ul class="nav">
+        <% @posts.each do |post|%>
+        <div class="form-group">
+            <li>
+                <a href="/posts/<%= post.id %>/show"><%= post.title%></a>
+                <div class="col-md-4 pull-right">
+                    <% post.tags.each do |tag|%>
+                <a href="/tags/<%= tag.id%>/search"><span class="label label-default"><%= tag.name %></span>
+                    <%end%>
+                </div>
+            </li>
+        </div>
+        <%end%>
+    </ul>
+
+
+
+

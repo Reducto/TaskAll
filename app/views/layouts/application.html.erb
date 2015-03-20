@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <title>Factory</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<style type="text/css">
+    .cont{
+    padding-left: 1%;
+    float: left;
+	}	
+    .list-group{
+    	padding-top: 5px;
+
+    }
+</style>
+
+
+
+
+<div class="cont">
+	<div class="list-group">
+	  <a href="/authors"><button type="button" class="btn btn-info">Авторы</button></a>
+	  <br>
+	  <a href="/posts"><button type="button" class="btn btn-info" onclick="Hide(this)" value="Статьи">Статьи</button></a>
+	   <br>
+	  <a href="/reports"><button type="button" class="btn btn-info">Отчёты</button></a>
+	   <br>
+	  <a href="/users"><button type="button" class="btn btn-info">Регистрация</button></a>
+	</div>
+</div>
+
+<%= yield %>
+
+</body>
+</html>

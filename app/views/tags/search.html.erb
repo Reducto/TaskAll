@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<div class="col-md-5">
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Статьи по тeгу: <%=@tag.name%>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <ul class="nav">
+		<% @posts.each do |post|%>
+        <div class="form-group">
+            <li><%= post.id%>.<a href="/posts/<%= post.id %>/show"><%=post.title%></a></li>
+        </div>
+        <%end%>
+    </ul>
+  </div>
+    <div class="text-center"><%= will_paginate @posts %></div>
+</div>
+</div>

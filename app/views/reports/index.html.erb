@@ -1,0 +1,21 @@
+<div class="col-md-3">
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Отчеты
+    <span class="badge"><%= @reports.count%></span>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <ul class="nav">
+        <% @reports.each do |report|%>
+        <div class="form-group">
+            <li>
+                <div class="form-group">
+            		<a href="<%=report%>"><%= report%></a>
+            </li>
+        </div>
+        <%end%>
+    </ul>
+  </div>
+</div>
+</div>
