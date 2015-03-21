@@ -12,7 +12,6 @@ require 'csv'
 # 1.  Нужно сделать rake задачу, которая очистит и сгенерирует базу из задания на генерацию (FactoryGir).
 
 
-
 # Этот же самый механизм цепочки заданий используется для того,
 # чтобы запустить задачу в среде выполнения Rails - будут доступны
 # все классы и модули, которые вы используете в своем Rails-приложении (
@@ -69,8 +68,11 @@ namespace :report do
   desc "Export html"
 	task html: :environment do
 	puts 'Create report for html file'
+
     report_path = 'public/report' + Date.today.to_s + '.html'
     max_comm = Comment.group(:post_id).count.sort_by {|k,v| v}.last
+    a = Post.all
+    a = a.find_by(id: max_comm[0])
     File.open(report_path, 'wb') do |file|
       file << '
       <html>
@@ -90,7 +92,6 @@ namespace :report do
     	<div class="panel-body">
     		<div class="form-group">
             <label>Число авторов:</label> ' 
-      file << Time.now
       file << Author.all.count
       file << '</div><div class="form-group">'
       file << '<label>Число статей:</label> '
@@ -100,9 +101,9 @@ namespace :report do
       file << Comment.all.count
       file << '</div><div class="form-group"><label>Статья с самым большим количеством комментариев:</label> '
       file << '<br><a href="/posts/'
-      file << max_comm[0]
+      file << a.id
       file << '/show">'
-      file << Post.find_by(id: max_comm[0]).title
+      file << a.title
       file << '</a>(кол-во комментариев: '
       file << max_comm[1]
       file << ')</div><div class="form-group">'
@@ -127,23 +128,3 @@ end
 # 4. Сделате контроллер, который будет вывотить список 
 # сделанных отчетов и ссылки на них.
 # Done
-
-
-
-# 5. Нужно сделать rake задачу, которая будет удалять старые статьи,
-#  должно остаться по 5 самых новых статей от каждого автора.
-
-
-task :oldpost do
-	puts 'Delete old post'
- 	authors = Author.joins( :posts ).group( 'users.id' ).having( 'count( author_id ) > 5' ).find_in_batches(batch_size: 500) do |part|
-		part.each do |author|
-			posts = Author.first.posts(:order => "created_at asc", :limit => 5)
-			Post.destroy_all(['author_id = (1), id NOT IN (2)', author.id, posts.collect(&:id)])
-   end
-  end
-  puts 'Done  Delete old post'
-end 
-
-
-# delete from posts where userid = id && id not in X
